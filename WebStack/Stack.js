@@ -1,36 +1,54 @@
-class Stack {
+export class Stack {
 	constructor() {
-		this.stack = [];
+		this.items = [];
+		this.top = 0;
 	}
 
-	push(element) {
-		this.stack.push(element);
-		return this.stack;
-	}
+	push(data) {
+		this.top++;
+		this.items[this.top] = data;
+	};
 
 	pop() {
-		return this.stack.pop();
+		let deleteData;
+
+		if(this.top){
+			deleteData = this.items[this.top];
+			delete this.items[this.top];
+			this.top--;
+			return deleteData;
+		}
 	}
+
+	getSize(){
+		return this.top;
+	};
+
+	isEmpty() {
+		if(!this.getSize()){
+			return true;
+		} else {
+			return false;
+		}
+	};
 
 	peek() {
-		return this.stack [this.stack.length -1];
+		if (this.isEmpty()) {
+			return null;
+		};
+
+		return this.itmes[this.top];
+	};
+
+	print() {
+		let result = '';
+		for (let i = this.top; i > 0; i--) {
+			result += this.items[i] + ' '
+		};
+
+		return result;
 	}
 
-	size(){
-		return this.stack.length;
-	}
-
-	print(){
-		console.log(this.stack)
-	}
 }
 
-const stack = new Stack();
-stack.size();
-stack.push("Plato 1");
-stack.push("Plato 2");
-stack.size(); // 2
-stack.print(); // [Plato 1, Plato 2]
-stack.peek(); // Plato 2
-stack.pop(); // Plato 2
-stack.size(); // Plato 1
+
