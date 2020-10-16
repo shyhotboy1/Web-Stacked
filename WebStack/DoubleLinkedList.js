@@ -1,3 +1,5 @@
+//No es realmente necesaria. Esta toda comentada por si acaso
+
 /*class Node2 {
     constructor(data, next, prev) {
         this.data = data;
