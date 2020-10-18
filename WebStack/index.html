@@ -9,5 +9,48 @@
 <script  type ="module" src="queue.js"></script>
 <script  type ="module" src="linkedList.js"></script>
 <script  type ="module" src="DoubleLinkedList.js"></script>
+
+<textarea id="orden" placeholder="Introduzca su orden"> </textarea>
+<button id="button" onclick="ordenes()">Enter</button>
+<script>
+
+ class Queue {
+  constructor () {
+    this.items = []
+  }
+  enqueue (data) {
+    this.items.push(data)
+    console.log(data)
+    return this.items  //print
+  }
+  dequeue () {
+    return this.items.shift() || null
+  }
+  getSize () {
+    return this.items.length
+  }
+  isEmpty () {
+    return this.items.length === 0
+  }
+  peek () {
+    return this.items[0] || null
+  }
+  print () {
+    return this.items
+  }
+}
+//Classes
+const queue = new Queue();
+
+let orden_init = document.getElementById('button')
+	
+	function ordenes(){
+    let leer = document.getElementById('orden').value
+	queue.enqueue(leer);
+};
+
+</script> 
+
+
 </body>
 </html>
