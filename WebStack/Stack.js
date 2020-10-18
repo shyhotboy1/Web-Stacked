@@ -37,7 +37,7 @@ export class Stack {
 			return null;
 		};
 
-		return this.itmes[this.top];
+		return this.items[this.top];
 	};
 
 	print() {
