@@ -1,53 +1,257 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Web-Stack</title>
 </head>
 <body>
-<script  type ="module" src="main.js"></script>
-<script  type ="module" src="Stack.js"></script>
-<script  type ="module" src="queue.js"></script>
-<script  type ="module" src="linkedList.js"></script>
-<script  type ="module" src="DoubleLinkedList.js"></script>
-
 <textarea id="orden" placeholder="Introduzca su orden"> </textarea>
-<button id="button" onclick="ordenes()">Enter</button>
+<button id="button" onclick="menu()">Menu</button>
+<button id="button" onclick="ordenes()">agregar</button>
+<button id="button" onclick="consulta()">Historial</button>
+<button id="button" onclick="eliminar_orden()">Eliminar</button>
 <script>
 
- class Queue {
-  constructor () {
-    this.items = []
-  }
-  enqueue (data) {
-    this.items.push(data)
-    console.log(data)
-    return this.items  //print
-  }
-  dequeue () {
-    return this.items.shift() || null
-  }
-  getSize () {
-    return this.items.length
-  }
-  isEmpty () {
-    return this.items.length === 0
-  }
-  peek () {
-    return this.items[0] || null
-  }
-  print () {
-    return this.items
-  }
+// Jan Manuel Báez 20-0067
+// Adrian Martinez 20-0772
+// Josue Limouzaine 20-0112
+
+//https://github.com/shyhotboy1/Web-Stacked Clases estan separadas motivo de bug de JavaScript con la funcion Onclick.
+
+class Node{
+	constructor(data, next) {
+         this.data = data;
+         this.next = next;
+	}
 }
-//Classes
-const queue = new Queue();
+
+class LinkedList {
+	constructor(){
+       this.head = null;
+       this.size = 0;
+	}
+
+	add(data) {
+		const newNode = new Node(data, null);
+		if (!this.head){
+			this.head = newNode
+		} else {
+			let current = this.head;
+			while(current.next){
+				current = current.next;
+			}
+			current.next = newNode;
+		}
+		this.size++;
+		console.log(data)
+	}
+
+	insertAt(data, index) {
+		if(index < 0 || index > this.size){
+			return null;
+		};
+
+		const newNode = new Node(data);
+		let current = this.head;
+		let previous;
+
+		if (index === 0) {
+			newNode.next = current;
+			this.head = newNode;
+		} else {
+			for(let i = 0; i < index; i++) {
+				previous = current;
+				current = current.next;
+			};
+
+			newNode.next = current;
+			previous.next = newNode;
+		}
+		this.size++;
+	}
+
+	print(){
+		if(!this.size === 0) {
+			return null
+		};
+		let current = this.head;
+		let result = '';
+		while(current) {
+			result += current.data += ' -> ';
+			current = current.next; 
+		}
+		result += 'X';
+		return result;
+	}
+
+	removeData(data) {
+		let current = this.head;
+		let previous = null;
+
+		while(current != null) {
+			if (current.data === data) {
+				if (!previous) {
+					this.head = current.next;
+				} else {
+					previous.next = current.next;
+				};
+				this.else--;
+				return current.data;
+			}
+			previous = current;
+			current = current.next;
+		} ;
+		return null;
+	}
+
+	removeFrom(index) {
+		if(index < 0 || index > this.size) {
+			return null
+		};
+
+		let current = this.head;
+		let previous = null;
+
+		if(index == 0) {
+			this.head = current.next;
+		} else {
+			for (let i = 0; i < index; i++) {
+				previous = current;
+				current = current.next;
+			};
+			previous.next = current.next;
+		}
+		this.size--;
+		return current.data;
+	};
+
+	isEmpty() {
+		return this.size === 0;
+	};
+
+	getSize() {
+		return this.size;
+	}
+}
+
+
+
+const linkedlist = new LinkedList();
+
+class Stack {
+	constructor() {
+		this.items = [];
+		this.top = 0;
+	}
+
+	push(data) {
+		this.top++;
+		this.items[this.top] = data;
+	};
+
+	pop() {
+		let deleteData;
+
+		if(this.top){
+			deleteData = this.items[this.top];
+			delete this.items[this.top];
+			this.top--;
+			return deleteData;
+		}
+	}
+
+	getSize(){
+		return this.top;
+	};
+
+	isEmpty() {
+		if(!this.getSize()){
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	peek() {
+		if (this.isEmpty()) {
+			return null;
+		};
+
+		return this.items[this.top];
+	};
+
+	print() {
+		let result = '';
+		for (let i = this.top; i > 0; i--) {
+			result += this.items[i] + ' '
+		};
+
+		return result;
+	}
+
+}
+const stack = new Stack();
+
+function menu(){
+stack.push("Ramen");
+stack.push("Carne a la plancha");
+stack.push("Bacon Cheese Burger");
+stack.push("Nuggets con Papitas Fritas");
+stack.push("Paro Cardiaco");
+stack.push("Filete Wellintong");
+stack.push("Ensalada cesar");
+stack.push("El Frutillero");
+stack.push("Sopa de pollo");
+stack.push("Carne de cerdo");
+stack.push("Churrasco");
+stack.push("Tacos Picantes");
+stack.push("Cheesecake");
+stack.push("Helado de Vainilla");
+stack.push("Brownie a la moda");
+stack.push("Refresco");
+stack.push("Presidente");
+stack.push("Vinos");
+stack.push("Agua");
+stack.push("Tequila");
+
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+
+}
 
 let orden_init = document.getElementById('button')
 	
 	function ordenes(){
     let leer = document.getElementById('orden').value
-	queue.enqueue(leer);
+   linkedlist.add(leer);
+}
+
+function consulta(){
+    let leer = document.getElementById('orden').value
+	console.log(linkedlist.print(ordenes));
 };
+
+function eliminar_orden(){
+    let leer = document.getElementById('orden').value
+    let x = prompt("Selecciona el numero del articulo que desea eliminar")
+     linkedlist.removeFrom(x);
+  	//linkedlist.removeData(leer);
+ 
+};
+
 
 </script> 
 
