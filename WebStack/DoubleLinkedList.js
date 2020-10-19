@@ -1,6 +1,6 @@
 //No es realmente necesaria. Esta toda comentada por si acaso
 
-/*class Node2 {
+class Node2 {
     constructor(data, next, prev) {
         this.data = data;
         this.next = next;
@@ -171,4 +171,4 @@ doubleLinkedList.removeFromTail();
 doubleLinkedList.removeData(4);
 console.log(doubleLinkedList.getSize());
 
-console.log(doubleLinkedList.print())*/
+console.log(doubleLinkedList.print())
